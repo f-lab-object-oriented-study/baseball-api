@@ -16,9 +16,9 @@ public class GamePlayData implements Data {
     public GamePlayData(Long remainingCount, JudgeResult judgeResult) {
         this.correct = judgeResult.isThreeStrikes();
         this.remainingCount = remainingCount;
-        this.strike = judgeResult.getStrikes();
-        this.ball = judgeResult.getBalls();
-        this.out = judgeResult.getOuts();
+        this.strike = judgeResult.getStrike();
+        this.ball = judgeResult.getBall();
+        this.out = judgeResult.getOut();
     }
     
 }

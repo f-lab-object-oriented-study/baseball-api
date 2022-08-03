@@ -27,7 +27,7 @@ public class BaseballTests {
     public void strike_judged() {
         assertEquals(1,
             gameRoom.judge("189")
-            .getStrikes()
+            .getStrike()
         );
     }
 
@@ -35,7 +35,7 @@ public class BaseballTests {
     public void ball_judged() {
         assertEquals(1,
             gameRoom.judge("819")
-            .getBalls()
+            .getBall()
         );
     }
 
@@ -43,7 +43,7 @@ public class BaseballTests {
     public void out_judged() {
         assertEquals(1,
             gameRoom.judge("129")
-            .getOuts()
+            .getOut()
         );
     }
 
@@ -51,7 +51,7 @@ public class BaseballTests {
     public void three_strike_closed_judged() {
         assertEquals(3,
             gameRoom.judge("123")
-            .getStrikes()
+            .getStrike()
         );
         
         assertEquals(true, gameRoom.getRemainingCount() == 0);

@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import kr.flab.baseballapi.application.data.GamePlayData;
 import kr.flab.baseballapi.domain.baseball.JudgeResult;
+import kr.flab.baseballapi.infrastructure.persistence.entity.GameHistory;
 import kr.flab.baseballapi.infrastructure.persistence.entity.GameRoom;
+import kr.flab.baseballapi.infrastructure.persistence.repository.GameHistoryRepository;
 import kr.flab.baseballapi.infrastructure.persistence.repository.GameRoomRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -15,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class GamePlayService {
 
     private final GameRoomRepository gameRoomRepository;
+    private final GameHistoryRepository gameHistoryRepository;
 
     public Optional<GamePlayData> progress(Long roomId, String answer) {
         Optional<GameRoom> optGameRoom = gameRoomRepository.findById(roomId);
@@ -33,8 +36,22 @@ public class GamePlayService {
         gameRoom.setRemainingCount(domainGameRoom.getRemainingCount());
         gameRoomRepository.save(gameRoom);
 
+        log(roomId, answer, judgeResult);
+
         GamePlayData playData = new GamePlayData(gameRoom.getRemainingCount(), judgeResult);
         return Optional.of(playData);
+    }
+
+    private void log(Long roomId, String answer, JudgeResult result) {
+        GameHistory gameHistory = GameHistory.builder()
+            .roomId(roomId)
+            .answer(answer)
+            .strike(result.getStrike())
+            .ball(result.getBall())
+            .out(result.getOut())
+            .build();
+
+        gameHistoryRepository.save(gameHistory);
     }
     
 }
