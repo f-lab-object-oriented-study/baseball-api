@@ -1,55 +1,48 @@
 package kr.flab.baseballapi.domain.baseball;
 
-import java.util.Optional;
-
 public class GameRoom {
-    private int remainingCount;
-    private int answerCount;
+    private Long remainingCount;
+    private Long answerCount;
     private Game game;
-    private boolean closed;
 
-    public GameRoom(int remainingCount) {
+    public GameRoom(Long remainingCount) {
         if (remainingCount <= 0) {
             throw new IllegalArgumentException("remainingCount must be greater than 0");
         }
 
         this.remainingCount = remainingCount;
-        this.answerCount = 0;
+        this.answerCount = 0L;
         game = new Game();
     }
+
+    public GameRoom(kr.flab.baseballapi.infrastructure.persistence.entity.GameRoom gameRoom) {
+       this.remainingCount = gameRoom.getRemainingCount();
+       this.answerCount = gameRoom.getAnswerCount();
+       this.game = new Game(gameRoom.getAnswer());
+    }
     
-    public int getRemainingCount() {
+    public Long getRemainingCount() {
         return remainingCount;
     }
 
-    public int getAnswerCount() {
+    public Long getAnswerCount() {
         return answerCount;
     }
 
-    public Optional<JudgeResult> judge(Answer answer) {
-        if (closed) {
-            return Optional.empty();
-        }
-        
+    public JudgeResult judge(String strAnswer) {
+        Answer answer = Answer.from(strAnswer);
         updateCounts();
 
         JudgeResult judgeResult = game.judge(answer);
         if (judgeResult.isThreeStrikes()) {
-            closed = true;
+            remainingCount = 0L;
         }
 
-        return Optional.of(game.judge(answer));
+        return game.judge(answer);
     }
 
     private void updateCounts() {
         answerCount++;
         remainingCount--;
-        if (remainingCount == 0) {
-            closed = true;
-        }
-    }
-
-    public boolean isClosed() {
-        return closed;
     }
 }

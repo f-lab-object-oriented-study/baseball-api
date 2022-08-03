@@ -12,7 +12,7 @@ public class BaseballTests {
 
     @BeforeEach
     public void setupGameRoom() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-        gameRoom = new GameRoom(10000);
+        gameRoom = new GameRoom(10000L);
         
         Field gameField = gameRoom.getClass().getDeclaredField("game");
         gameField.setAccessible(true);
@@ -26,9 +26,7 @@ public class BaseballTests {
     @Test
     public void strike_judged() {
         assertEquals(1,
-            gameRoom.judge(
-                new Answer(1, 8, 9)
-            ).get()
+            gameRoom.judge("189")
             .getStrikes()
         );
     }
@@ -36,9 +34,7 @@ public class BaseballTests {
     @Test
     public void ball_judged() {
         assertEquals(1,
-            gameRoom.judge(
-                new Answer(8, 1, 9)
-            ).get()
+            gameRoom.judge("819")
             .getBalls()
         );
     }
@@ -46,9 +42,7 @@ public class BaseballTests {
     @Test
     public void out_judged() {
         assertEquals(1,
-            gameRoom.judge(
-                new Answer(1, 2, 9)
-            ).get()
+            gameRoom.judge("129")
             .getOuts()
         );
     }
@@ -56,12 +50,10 @@ public class BaseballTests {
     @Test
     public void three_strike_closed_judged() {
         assertEquals(3,
-            gameRoom.judge(
-                new Answer(1, 2, 3)
-            ).get()
+            gameRoom.judge("123")
             .getStrikes()
         );
         
-        assertEquals(true, gameRoom.isClosed());
+        assertEquals(true, gameRoom.getRemainingCount() == 0);
     }
 }

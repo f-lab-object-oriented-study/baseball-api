@@ -8,12 +8,15 @@ public class Response {
     private Data data;
     private Error error;
 
-    public Response(boolean success, Data data) {
-        this.success = success;
+    public Response(Data data) {
+        this.success = true;
         this.data = data;
+        this.error = null;
     }
-    
-    public void setError(Error error) {
+
+    public Response(Error error) {
+        this.success = false;
+        this.data = null;
         this.error = error;
     }
 }
