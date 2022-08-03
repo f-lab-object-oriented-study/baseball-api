@@ -62,4 +62,9 @@ public class Answer {
 
         return outs;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(balls[0]) + balls[1] + balls[2];
+    }
 }
