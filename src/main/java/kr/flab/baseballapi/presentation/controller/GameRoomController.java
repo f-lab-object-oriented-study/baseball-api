@@ -4,8 +4,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.flab.baseballapi.application.data.GamePlayData;
+import kr.flab.baseballapi.application.data.GameResultData;
 import kr.flab.baseballapi.application.data.GameStartData;
 import kr.flab.baseballapi.application.service.GamePlayService;
+import kr.flab.baseballapi.application.service.GameResultService;
 import kr.flab.baseballapi.application.service.GameStartService;
 import kr.flab.baseballapi.presentation.command.GamePlayCommand;
 import kr.flab.baseballapi.presentation.data.Error;
@@ -15,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +29,7 @@ public class GameRoomController {
 
     private final GameStartService gameStartService;
     private final GamePlayService gamePlayService;
+    private final GameResultService gameResultService;
 
     @PostMapping("/start")
     public Response startGame() {
@@ -42,6 +46,11 @@ public class GameRoomController {
         }
         return new Response(gamePlayData.get());
     }
-    
+
+    @GetMapping("/{roomId}")
+    public Response getGameResult(@PathVariable("roomId") Long roomId) {
+        GameResultData gameResultData = gameResultService.progress(roomId);
+        return new Response(gameResultData);
+    }   
     
 }
