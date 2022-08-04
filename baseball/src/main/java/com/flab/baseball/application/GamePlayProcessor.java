@@ -16,7 +16,7 @@ public class GamePlayProcessor {
 	private final RoomRepository roomRepository;
 	private final GameHistoryRepository gameHistoryRepository;
 
-	public GamePlayData gamePlay(Long roomId, String answer) {
+	public GamePlayData execute(Long roomId, String answer) {
 		Room room = roomRepository.findRoomById(roomId);
 		GameResult gameResult = room.gamePlay(answer);
 

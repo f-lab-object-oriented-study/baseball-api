@@ -14,7 +14,7 @@ public class GameStartProcessor {
 
 	private final RoomRepository roomRepository;
 
-	public GameStartData gameStart() {
+	public GameStartData execute() {
 		Room room = new Room(
 			Answer.create(
 				new RandomAnswerGenerator()

@@ -13,7 +13,7 @@ public class GameHistoriesSearchProcessor {
 
 	private final GameHistoryRepository gameHistoryRepository;
 
-	public GameHistoriesData findHistories(Long roomId) {
+	public GameHistoriesData execute(Long roomId) {
 		List<GameHistory> gameHistories = gameHistoryRepository.findAllByRoomId(roomId);
 		return new GameHistoriesData(gameHistories);
 	}

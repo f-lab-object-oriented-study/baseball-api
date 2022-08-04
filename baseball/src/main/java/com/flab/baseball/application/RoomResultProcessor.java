@@ -12,7 +12,7 @@ public class RoomResultProcessor {
 
 	private final RoomRepository roomRepository;
 
-	public RoomResultData roomResult(Long roomId) {
+	public RoomResultData execute(Long roomId) {
 		Room room = roomRepository.findRoomById(roomId);
 		return new RoomResultData(room.getRound());
 	}

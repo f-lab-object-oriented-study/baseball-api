@@ -31,14 +31,14 @@ public class GameController {
 
 	@PostMapping("/start")
 	public GameResponse<GameStartData> gameStart() {
-		GameStartData gameStartData = gameStartProcessor.gameStart();
+		GameStartData gameStartData = gameStartProcessor.execute();
 		return new GameResponse<>(gameStartData);
 	}
 
 	@PostMapping("/{roomId}/answer")
 	public GameResponse<Object> gamePlay(@PathVariable Long roomId, @RequestBody GamePlayRequest request) {
 		try {
-			GamePlayData gamePlayData = gamePlayProcessor.gamePlay(roomId, request.getAnswer());
+			GamePlayData gamePlayData = gamePlayProcessor.execute(roomId, request.getAnswer());
 			return new GameResponse<>(gamePlayData);
 		} catch (IllegalStateException e) {
 			return GameResponse.toError(CLOSED_GAME);
@@ -47,13 +47,13 @@ public class GameController {
 
 	@GetMapping("/{roomId}")
 	public GameResponse<RoomResultData> roomResult(@PathVariable Long roomId) {
-		RoomResultData roomResultData = roomResultProcessor.roomResult(roomId);
+		RoomResultData roomResultData = roomResultProcessor.execute(roomId);
 		return new GameResponse<>(roomResultData);
 	}
 
 	@GetMapping("/{roomId}/history")
 	public GameResponse<GameHistoriesData> findHistory(@PathVariable Long roomId) {
-		GameHistoriesData histories = gameHistoriesSearchProcessor.findHistories(roomId);
+		GameHistoriesData histories = gameHistoriesSearchProcessor.execute(roomId);
 		return new GameResponse<>(histories);
 	}
 
