@@ -8,13 +8,14 @@ import lombok.Getter;
 @Getter
 public class GamePlayData {
 
-	private boolean correct = true;
-	private Integer remainingCount;
-	private Integer strike;
-	private Integer ball;
-	private Integer out;
+	private final boolean correct;
+	private final int remainingCount;
+	private final int strike;
+	private final int ball;
+	private final int out;
 
-	public GamePlayData(Integer round, GameResult gameResult) {
+	public GamePlayData(int round, GameResult gameResult) {
+		this.correct = gameResult.isCorrect();
 		this.remainingCount = MAXIMUM_ROUND - round;
 		this.strike = gameResult.getStrike();
 		this.ball = gameResult.getBall();

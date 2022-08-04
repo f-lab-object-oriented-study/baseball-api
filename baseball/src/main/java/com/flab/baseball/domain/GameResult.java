@@ -1,5 +1,7 @@
 package com.flab.baseball.domain;
 
+import static com.flab.baseball.util.BaseBallUtils.ANSWER_LENGTH;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -15,6 +17,10 @@ public class GameResult {
 		this.strike = strike;
 		this.ball = ball;
 		this.out = out;
+	}
+
+	public boolean isCorrect() {
+		return strike == ANSWER_LENGTH;
 	}
 
 }

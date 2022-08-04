@@ -8,28 +8,38 @@ import lombok.Getter;
 public class Room {
 
 	private Long id;
-	private Integer round;
+	private int round;
+	private boolean isCorrect;
 	private final Answer answer;
 
 	public Room(Answer answer) {
 		this(0, answer);
 	}
 
-	private Room(Integer round, Answer answer) {
+	private Room(int round, Answer answer) {
 		this.round = round;
 		this.answer = answer;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public GameResult gamePlay(String inputAnswer) {
+		nextRound();
+		GameResult gameResult = answer.game(inputAnswer);
+		this.isCorrect = gameResult.isCorrect();
+
+
+		return gameResult;
 	}
 
-	public Integer nextRound() {
-		if (round == MAXIMUM_ROUND) {
+	private int nextRound() {
+		if (round == MAXIMUM_ROUND || isCorrect) {
 			throw new IllegalStateException("이미 종료된 게임입니다.");
 		}
 
 		return ++round;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

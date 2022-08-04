@@ -21,4 +21,25 @@ public class Answer {
 		this.answerNumber = answer;
 	}
 
+	public GameResult game(String inputAnswer) {
+		String[] answers = answerNumber.split("");
+		String[] inputAnswers = inputAnswer.split("");
+		int strike = 0;
+		int ball = 0;
+		int out = 0;
+
+		for (int idx = 0; idx < inputAnswers.length; idx++) {
+			String num = inputAnswers[idx];
+			if (num.equals(answers[idx])) {
+				strike++;
+			} else if (answerNumber.contains(num)) {
+				ball++;
+			} else {
+				out++;
+			}
+		}
+
+		return new GameResult(strike, ball, out);
+	}
+
 }
