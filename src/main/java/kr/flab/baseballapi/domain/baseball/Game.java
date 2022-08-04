@@ -8,7 +8,7 @@ public class Game {
     }
 
     public Game(String answer) {
-        correctAnswer = Answer.from(answer);
+        correctAnswer = Answer.fromString(answer);
     }
 
     public JudgeResult judge(Answer answer) {

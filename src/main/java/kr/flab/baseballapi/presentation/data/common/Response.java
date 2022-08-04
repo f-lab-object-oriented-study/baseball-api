@@ -1,4 +1,4 @@
-package kr.flab.baseballapi.presentation.data;
+package kr.flab.baseballapi.presentation.data.common;
 
 import lombok.Getter;
 

@@ -1,6 +1,6 @@
-package kr.flab.baseballapi.application.data;
+package kr.flab.baseballapi.presentation.data;
 
-import kr.flab.baseballapi.presentation.data.Data;
+import kr.flab.baseballapi.presentation.data.common.Data;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

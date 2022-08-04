@@ -3,16 +3,16 @@ package kr.flab.baseballapi.presentation.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.flab.baseballapi.application.data.GamePlayData;
-import kr.flab.baseballapi.application.data.GameResultData;
-import kr.flab.baseballapi.application.data.GameStartData;
 import kr.flab.baseballapi.application.service.GamePlayService;
 import kr.flab.baseballapi.application.service.GameResultService;
 import kr.flab.baseballapi.application.service.GameStartService;
 import kr.flab.baseballapi.presentation.command.GamePlayCommand;
-import kr.flab.baseballapi.presentation.data.Error;
-import kr.flab.baseballapi.presentation.data.ErrorCode;
-import kr.flab.baseballapi.presentation.data.Response;
+import kr.flab.baseballapi.presentation.data.GamePlayData;
+import kr.flab.baseballapi.presentation.data.GameResultData;
+import kr.flab.baseballapi.presentation.data.GameStartData;
+import kr.flab.baseballapi.presentation.data.common.Error;
+import kr.flab.baseballapi.presentation.data.common.ErrorCode;
+import kr.flab.baseballapi.presentation.data.common.Response;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;

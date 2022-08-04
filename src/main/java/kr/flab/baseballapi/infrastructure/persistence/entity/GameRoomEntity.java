@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class GameRoom {
+public class GameRoomEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roomId;
@@ -24,10 +24,21 @@ public class GameRoom {
     private Long answerCount;
     @Column
     private String answer;
+    @Column
+    private boolean closed;
 
-    public GameRoom(Long remainingCount, String answer) {
+    public GameRoomEntity(Long remainingCount, String answer, boolean closed) {
         this.remainingCount = remainingCount;
         this.answerCount = 0L;
         this.answer = answer;
+    }
+
+    public void updateCounts(Long remainingCount, Long answerCount) {
+        this.remainingCount = remainingCount;
+        this.answerCount = answerCount;
+    }
+
+    public void updateClosed() {
+        this.closed = true;
     }
 }

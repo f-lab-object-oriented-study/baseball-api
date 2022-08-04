@@ -4,12 +4,13 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import kr.flab.baseballapi.application.data.GamePlayData;
+import kr.flab.baseballapi.domain.baseball.GameRoom;
 import kr.flab.baseballapi.domain.baseball.JudgeResult;
-import kr.flab.baseballapi.infrastructure.persistence.entity.GameHistory;
-import kr.flab.baseballapi.infrastructure.persistence.entity.GameRoom;
+import kr.flab.baseballapi.infrastructure.persistence.entity.GameHistoryEntity;
+import kr.flab.baseballapi.infrastructure.persistence.entity.GameRoomEntity;
 import kr.flab.baseballapi.infrastructure.persistence.repository.GameHistoryRepository;
 import kr.flab.baseballapi.infrastructure.persistence.repository.GameRoomRepository;
+import kr.flab.baseballapi.presentation.data.GamePlayData;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -20,30 +21,41 @@ public class GamePlayService {
     private final GameHistoryRepository gameHistoryRepository;
 
     public Optional<GamePlayData> progress(Long roomId, String answer) {
-        Optional<GameRoom> optGameRoom = gameRoomRepository.findById(roomId);
-        if (optGameRoom.isEmpty()) {
-            return Optional.empty();
-        }
-        GameRoom gameRoom = optGameRoom.get();
-        if (gameRoom.getRemainingCount() == 0) {
+        Optional<GameRoomEntity> optGameRoomEntity = gameRoomRepository.findById(roomId);
+        if (!isValidGameRoom(optGameRoomEntity)) {
             return Optional.empty();
         }
 
-        kr.flab.baseballapi.domain.baseball.GameRoom domainGameRoom = new kr.flab.baseballapi.domain.baseball.GameRoom(gameRoom);
-        JudgeResult judgeResult = domainGameRoom.judge(answer);
+        GameRoomEntity gameRoomEntity = optGameRoomEntity.get();
+        
+        GameRoom gameRoom = GameRoom.fromEntity(gameRoomEntity);
+        JudgeResult judgeResult = gameRoom.judge(answer);
 
-        gameRoom.setAnswerCount(domainGameRoom.getAnswerCount());
-        gameRoom.setRemainingCount(domainGameRoom.getRemainingCount());
-        gameRoomRepository.save(gameRoom);
+        gameRoomEntity.updateCounts(gameRoom.getRemainingCount(), gameRoom.getAnswerCount());
+        if (gameRoom.isClosed()) {
+            gameRoomEntity.updateClosed();
+        }
+        gameRoomRepository.save(gameRoomEntity);
 
         log(roomId, answer, judgeResult);
 
-        GamePlayData playData = new GamePlayData(gameRoom.getRemainingCount(), judgeResult);
+        GamePlayData playData = new GamePlayData(gameRoomEntity.getRemainingCount(), judgeResult);
         return Optional.of(playData);
     }
 
+    private boolean isValidGameRoom(Optional<GameRoomEntity> optGameRoomEntity) {
+        if (optGameRoomEntity.isEmpty()) {
+            return false;
+        }
+        GameRoomEntity gameRoomEntity = optGameRoomEntity.get();
+        if (gameRoomEntity.getRemainingCount() == 0 || gameRoomEntity.isClosed()) {
+            return false;
+        }
+        return true;
+    }
+
     private void log(Long roomId, String answer, JudgeResult result) {
-        GameHistory gameHistory = GameHistory.builder()
+        GameHistoryEntity gameHistory = GameHistoryEntity.builder()
             .roomId(roomId)
             .answer(answer)
             .strike(result.getStrike())
