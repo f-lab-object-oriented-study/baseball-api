@@ -1,9 +1,14 @@
 package com.flab.baseball.infrastructure;
 
 import com.flab.baseball.domain.GameHistory;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class MemoryGameHistoryRepository implements GameHistoryRepository {
 
 	Map<Long, GameHistory> histories = new ConcurrentHashMap<>();
@@ -20,6 +25,21 @@ public class MemoryGameHistoryRepository implements GameHistoryRepository {
 		}
 
 		return histories.get(gameHistory.getId());
+	}
+
+	@Override
+	public List<GameHistory> findAllByRoomId(Long roomId) {
+		List<GameHistory> gameHistories = new ArrayList<>();
+
+		for (Entry<Long, GameHistory> entry : histories.entrySet()) {
+			GameHistory value = entry.getValue();
+
+			if (value.hasRoomId(roomId)) {
+				gameHistories.add(value);
+			}
+		}
+
+		return gameHistories;
 	}
 
 }

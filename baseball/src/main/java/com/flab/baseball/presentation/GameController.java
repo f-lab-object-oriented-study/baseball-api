@@ -2,9 +2,11 @@ package com.flab.baseball.presentation;
 
 import static com.flab.baseball.presentation.response.ErrorCode.CLOSED_GAME;
 
+import com.flab.baseball.application.GameHistoriesSearchProcessor;
 import com.flab.baseball.application.GamePlayProcessor;
 import com.flab.baseball.application.GameStartProcessor;
 import com.flab.baseball.application.RoomResultProcessor;
+import com.flab.baseball.application.data.GameHistoriesData;
 import com.flab.baseball.application.data.GamePlayData;
 import com.flab.baseball.application.data.GameStartData;
 import com.flab.baseball.application.data.RoomResultData;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,6 +27,7 @@ public class GameController {
 	private final GameStartProcessor gameStartProcessor;
 	private final GamePlayProcessor gamePlayProcessor;
 	private final RoomResultProcessor roomResultProcessor;
+	private final GameHistoriesSearchProcessor gameHistoriesSearchProcessor;
 
 	@PostMapping("/start")
 	public GameResponse<GameStartData> gameStart() {
@@ -47,6 +49,12 @@ public class GameController {
 	public GameResponse<RoomResultData> roomResult(@PathVariable Long roomId) {
 		RoomResultData roomResultData = roomResultProcessor.roomResult(roomId);
 		return new GameResponse<>(roomResultData);
+	}
+
+	@GetMapping("/{roomId}/history")
+	public GameResponse<GameHistoriesData> findHistory(@PathVariable Long roomId) {
+		GameHistoriesData histories = gameHistoriesSearchProcessor.findHistories(roomId);
+		return new GameResponse<>(histories);
 	}
 
 }

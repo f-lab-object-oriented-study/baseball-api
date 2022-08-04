@@ -27,5 +27,8 @@ public class GameHistory {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
+	public boolean hasRoomId(Long roomId) {
+		return this.roomId.equals(roomId);
+	}
 }

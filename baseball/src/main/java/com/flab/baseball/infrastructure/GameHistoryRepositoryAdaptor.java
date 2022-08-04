@@ -1,6 +1,7 @@
 package com.flab.baseball.infrastructure;
 
 import com.flab.baseball.domain.GameHistory;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,10 @@ public class GameHistoryRepositoryAdaptor {
 
 	public GameHistory persist(GameHistory gameHistory) {
 		return gameHistoryRepository.persist(gameHistory);
+	}
+
+	public List<GameHistory> findAllByRoomId(Long roomId) {
+		return gameHistoryRepository.findAllByRoomId(roomId);
 	}
 
 }
