@@ -1,4 +1,4 @@
-package com.flab.baseball.infrastructure;
+package com.flab.baseball.domain.repository;
 
 import com.flab.baseball.domain.GameHistory;
 import java.util.List;

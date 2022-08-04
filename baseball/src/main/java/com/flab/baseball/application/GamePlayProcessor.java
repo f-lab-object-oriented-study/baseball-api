@@ -4,8 +4,8 @@ import com.flab.baseball.application.data.GamePlayData;
 import com.flab.baseball.domain.GameHistory;
 import com.flab.baseball.domain.GameResult;
 import com.flab.baseball.domain.Room;
-import com.flab.baseball.infrastructure.GameHistoryRepositoryAdaptor;
-import com.flab.baseball.infrastructure.RoomRepositoryAdaptor;
+import com.flab.baseball.domain.repository.GameHistoryRepository;
+import com.flab.baseball.domain.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class GamePlayProcessor {
 
-	private final RoomRepositoryAdaptor roomRepositoryAdaptor;
-	private final GameHistoryRepositoryAdaptor gameHistoryRepositoryAdaptor;
+	private final RoomRepository roomRepository;
+	private final GameHistoryRepository gameHistoryRepository;
 
 	public GamePlayData gamePlay(Long roomId, String answer) {
-		Room room = roomRepositoryAdaptor.getRoomById(roomId);
+		Room room = roomRepository.findRoomById(roomId);
 		GameResult gameResult = room.gamePlay(answer);
 
-		gameHistoryRepositoryAdaptor.persist(
+		gameHistoryRepository.persist(
 			GameHistory.create(
 				roomId,
 				answer,

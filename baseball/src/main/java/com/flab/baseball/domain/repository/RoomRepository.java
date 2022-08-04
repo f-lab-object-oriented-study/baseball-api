@@ -1,4 +1,4 @@
-package com.flab.baseball.infrastructure;
+package com.flab.baseball.domain.repository;
 
 import com.flab.baseball.domain.Room;
 
@@ -6,6 +6,6 @@ public interface RoomRepository {
 
 	Room persist(Room room);
 
-	Room getRoomById(Long id);
+	Room findRoomById(Long id);
 
 }

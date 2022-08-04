@@ -1,21 +1,24 @@
 package com.flab.baseball.infrastructure;
 
 import com.flab.baseball.domain.Room;
+import com.flab.baseball.domain.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class RoomRepositoryAdaptor {
+public class RoomRepositoryAdaptor implements RoomRepository {
 
-	private final RoomRepository roomRepository;
+	private final MemoryRoomRepository roomRepository;
 
+	@Override
 	public Room persist(Room room) {
 		return roomRepository.persist(room);
 	}
 
-	public Room getRoomById(Long id) {
-		return roomRepository.getRoomById(id);
+	@Override
+	public Room findRoomById(Long id) {
+		return roomRepository.findRoomById(id);
 	}
 
 }

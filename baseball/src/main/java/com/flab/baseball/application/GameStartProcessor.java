@@ -4,7 +4,7 @@ import com.flab.baseball.application.data.GameStartData;
 import com.flab.baseball.domain.Answer;
 import com.flab.baseball.domain.RandomAnswerGenerator;
 import com.flab.baseball.domain.Room;
-import com.flab.baseball.infrastructure.RoomRepositoryAdaptor;
+import com.flab.baseball.domain.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class GameStartProcessor {
 
-	private final RoomRepositoryAdaptor roomRepositoryAdaptor;
+	private final RoomRepository roomRepository;
 
 	public GameStartData gameStart() {
 		Room room = new Room(
@@ -20,7 +20,7 @@ public class GameStartProcessor {
 				new RandomAnswerGenerator()
 			)
 		);
-		Room savedRoom = roomRepositoryAdaptor.persist(room);
+		Room savedRoom = roomRepository.persist(room);
 		return new GameStartData(savedRoom.getId());
 	}
 

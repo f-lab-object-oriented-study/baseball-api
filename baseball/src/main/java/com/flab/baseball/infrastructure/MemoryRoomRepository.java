@@ -6,11 +6,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MemoryRoomRepository implements RoomRepository {
+public class MemoryRoomRepository {
 
 	Map<Long, Room> rooms = new ConcurrentHashMap<>();
 
-	@Override
 	public Room persist(Room room) {
 		if (room.getId() == null) {
 			room.setId((long) rooms.size());
@@ -24,8 +23,7 @@ public class MemoryRoomRepository implements RoomRepository {
 		return rooms.get(room.getId());
 	}
 
-	@Override
-	public Room getRoomById(Long id) {
+	public Room findRoomById(Long id) {
 		Room room = rooms.get(id);
 
 		if (room == null) {

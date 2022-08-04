@@ -9,11 +9,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MemoryGameHistoryRepository implements GameHistoryRepository {
+public class MemoryGameHistoryRepository {
 
 	Map<Long, GameHistory> histories = new ConcurrentHashMap<>();
 
-	@Override
 	public GameHistory persist(GameHistory gameHistory) {
 		if (gameHistory.getId() == null) {
 			gameHistory.setId((long) histories.size());
@@ -27,7 +26,6 @@ public class MemoryGameHistoryRepository implements GameHistoryRepository {
 		return histories.get(gameHistory.getId());
 	}
 
-	@Override
 	public List<GameHistory> findAllByRoomId(Long roomId) {
 		List<GameHistory> gameHistories = new ArrayList<>();
 
