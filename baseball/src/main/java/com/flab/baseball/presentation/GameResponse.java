@@ -10,7 +10,15 @@ public class GameResponse<T> {
 	private GameError error;
 
 	public GameResponse(T data) {
-		this.data = data;
+		this(data, null);
 	}
 
+	private GameResponse(T data, GameError gameError) {
+		this.data = data;
+		this.error = gameError;
+	}
+
+	public static GameResponse<Object> toError(ErrorCode errorCode) {
+		return new GameResponse<>(null, new GameError(errorCode));
+	}
 }
