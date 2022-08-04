@@ -2,18 +2,16 @@ package com.flab.baseball.domain;
 
 import static com.flab.baseball.util.BaseBallUtils.MAXIMUM_ROUND;
 
+import lombok.Getter;
+
+@Getter
 public class Room {
 
 	private Long id;
-
 	private Integer round;
 
 	public Room() {
 		this.round = 0;
-	}
-
-	public Long getId() {
-		return id;
 	}
 
 	public void setId(Long id) {
@@ -27,4 +25,5 @@ public class Room {
 
 		return ++round;
 	}
+
 }

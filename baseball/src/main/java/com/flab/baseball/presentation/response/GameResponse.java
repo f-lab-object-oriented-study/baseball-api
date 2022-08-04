@@ -1,4 +1,4 @@
-package com.flab.baseball.presentation;
+package com.flab.baseball.presentation.response;
 
 import lombok.Getter;
 
