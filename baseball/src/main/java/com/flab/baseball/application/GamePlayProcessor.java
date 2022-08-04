@@ -1,6 +1,6 @@
 package com.flab.baseball.application;
 
-import com.flab.baseball.domain.BaseBall;
+import com.flab.baseball.domain.BaseBallGame;
 import com.flab.baseball.domain.GameResult;
 import com.flab.baseball.domain.Room;
 import com.flab.baseball.infrastructure.RoomRepositoryAdaptor;
@@ -27,7 +27,7 @@ public class GamePlayProcessor {
 		Room room = roomRepositoryAdaptor.getRoomById(roomId);
 		Integer round = room.nextRound();
 
-		BaseBall baseBall = new BaseBall(answer);
+		BaseBallGame baseBall = new BaseBallGame(answer);
 		GameResult gameResult = baseBall.play(generatePlayNumber());
 
 		return new GamePlayData(round, gameResult);

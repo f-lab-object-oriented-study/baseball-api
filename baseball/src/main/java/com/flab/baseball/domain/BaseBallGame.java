@@ -1,10 +1,10 @@
 package com.flab.baseball.domain;
 
-public class BaseBall {
+public class BaseBallGame {
 
 	private String answer;
 
-	public BaseBall(String answer) {
+	public BaseBallGame(String answer) {
 		this.answer = answer;
 	}
 

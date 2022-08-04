@@ -9,9 +9,15 @@ public class Room {
 
 	private Long id;
 	private Integer round;
+	private final Answer answer;
 
-	public Room() {
-		this.round = 0;
+	public Room(Answer answer) {
+		this(0, answer);
+	}
+
+	private Room(Integer round, Answer answer) {
+		this.round = round;
+		this.answer = answer;
 	}
 
 	public void setId(Long id) {

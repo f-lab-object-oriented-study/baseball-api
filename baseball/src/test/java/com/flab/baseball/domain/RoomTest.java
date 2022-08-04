@@ -10,7 +10,7 @@ class RoomTest {
 	@Test
 	void 게임카운트() {
 		// given
-		Room room = new Room();
+		Room room = new Room(Answer.create(new RandomAnswerGenerator()));
 
 		// when
 		Integer nextRound = room.nextRound();
@@ -22,7 +22,7 @@ class RoomTest {
 	@Test
 	void 게임횟수초과() {
 		// given
-		Room room = new Room();
+		Room room = new Room(Answer.create(new RandomAnswerGenerator()));
 
 		// when
 		room.nextRound();
