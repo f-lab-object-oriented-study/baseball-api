@@ -4,7 +4,7 @@ import com.flab.baseball.domain.BaseBall;
 import com.flab.baseball.domain.GameResult;
 import com.flab.baseball.domain.Room;
 import com.flab.baseball.infrastructure.RoomRepositoryAdaptor;
-import com.flab.baseball.presentation.data.GamePlayData;
+import com.flab.baseball.application.data.GamePlayData;
 import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.Set;

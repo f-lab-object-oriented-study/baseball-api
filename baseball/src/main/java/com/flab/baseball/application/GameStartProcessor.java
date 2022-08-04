@@ -2,7 +2,7 @@ package com.flab.baseball.application;
 
 import com.flab.baseball.domain.Room;
 import com.flab.baseball.infrastructure.RoomRepositoryAdaptor;
-import com.flab.baseball.presentation.data.GameStartData;
+import com.flab.baseball.application.data.GameStartData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.flab.baseball.presentation.data;
+package com.flab.baseball.application.data;
 
 import static com.flab.baseball.util.BaseBallUtils.MAXIMUM_ROUND;
 
