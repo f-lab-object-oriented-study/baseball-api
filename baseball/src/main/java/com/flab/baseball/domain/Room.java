@@ -23,7 +23,7 @@ public class Room {
 
 	public GameResult gamePlay(String inputAnswer) {
 		nextRound();
-		GameResult gameResult = answer.game(inputAnswer);
+		GameResult gameResult = answer.play(inputAnswer);
 		this.isCorrect = gameResult.isCorrect();
 
 

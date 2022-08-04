@@ -21,7 +21,7 @@ public class Answer {
 		this.answerNumber = answer;
 	}
 
-	public GameResult game(String inputAnswer) {
+	public GameResult play(String inputAnswer) {
 		String[] answers = answerNumber.split("");
 		String[] inputAnswers = inputAnswer.split("");
 		int strike = 0;
