@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class GameStartData {
 
-	private Long roomId;
+	private final Long roomId;
 
 	public GameStartData(Long id) {
 		roomId = id;

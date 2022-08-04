@@ -7,8 +7,8 @@ import lombok.Getter;
 @Getter
 public class RoomResultData {
 
-	private Integer remainingCount;
-	private Integer answerCount;
+	private final Integer remainingCount;
+	private final Integer answerCount;
 
 	public RoomResultData(Integer round) {
 		this.remainingCount = MAXIMUM_ROUND - round;
