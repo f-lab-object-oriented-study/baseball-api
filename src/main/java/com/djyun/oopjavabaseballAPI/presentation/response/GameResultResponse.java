@@ -6,6 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class GameResultResponse {
-    private int remainingCount;
-    private int answerCount;
+
+	private int remainingCount;
+	private int answerCount;
 }

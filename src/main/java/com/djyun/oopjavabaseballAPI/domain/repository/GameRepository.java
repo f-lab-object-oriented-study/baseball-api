@@ -5,10 +5,12 @@ import com.djyun.oopjavabaseballAPI.domain.entity.GameHistories;
 
 
 public interface GameRepository {
-    Game save(Game game);
-    Game findById(int roomId);
 
-    void saveHistory(int roomId, GameHistories gameHistories);
+	Game save(Game game);
 
-    GameHistories getHistories(int roomId);
+	Game findById(int roomId);
+
+	void saveHistory(int roomId, GameHistories gameHistories);
+
+	GameHistories getHistories(int roomId);
 }

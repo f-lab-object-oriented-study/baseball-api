@@ -8,54 +8,60 @@ import java.util.ArrayList;
 @Data
 @AllArgsConstructor
 public class Game {
-    private int roomId;
-    private boolean closed;
-    private String answer;
-    private final int totalCount; // answerCount = totalCount - remainingCount
-    private int remainingCount;
 
-    public GuessResult guess(String guessAnswer) {
-        if (remainingCount <= 0 || this.closed){
-            throw new AlreadyClosedGameException();
-        }
-        -- this.remainingCount;
+	private int roomId;
+	private boolean closed;
+	private String answer;
+	private final int totalCount; // answerCount = totalCount - remainingCount
+	private int remainingCount;
 
-        int strike = checkStrike(guessAnswer, this.answer);
-        int ball = checkBall(guessAnswer, this.answer);
-        int out = this.answer.length() - strike - ball;
+	public GuessResult guess(String guessAnswer) {
+		if (remainingCount <= 0 || this.closed) {
+			throw new AlreadyClosedGameException();
+		}
+		--this.remainingCount;
 
-        if (this.answer.length() == strike){
-            this.closed = true;
-        }
+		int strike = checkStrike(guessAnswer, this.answer);
+		int ball = checkBall(guessAnswer, this.answer);
+		int out = this.answer.length() - strike - ball;
 
-        return new GuessResult(this.closed, this.remainingCount, strike, ball, out);
-    }
+		if (this.answer.length() == strike) {
+			this.closed = true;
+		}
 
-    private int checkBall(String guessAnswer, String answer) {
-        char[] guessAnswerCharArr = guessAnswer.toCharArray();
-        char[] answerCharArr = answer.toCharArray();
+		return new GuessResult(this.closed, this.remainingCount, strike, ball, out);
+	}
 
-        int res = 0;
-        for (int i = 0; i < answerCharArr.length; i++) {
-            if (guessAnswerCharArr[i] != answerCharArr[i] && answer.contains(String.valueOf(guessAnswerCharArr[i]))){
-                ++ res;
+	private int checkBall(String guessAnswer, String answer) {
+		char[] guessAnswerCharArr = guessAnswer.toCharArray();
+		char[] answerCharArr = answer.toCharArray();
+
+		int res = 0;
+		for (int i = 0; i < answerCharArr.length; i++) {
+			if (guessAnswerCharArr[i] != answerCharArr[i] && answer.contains(
+				String.valueOf(guessAnswerCharArr[i]))) {
+				++res;
+			}
+		}
+		return res;
+	}
+
+	private int checkStrike(String guessAnswer, String answer) {
+		char[] guessAnswerCharArr = guessAnswer.toCharArray();
+		char[] answerCharArr = answer.toCharArray();
+
+		int res = 0;
+		for (int i = 0; i < answerCharArr.length; i++) {
+            if (guessAnswerCharArr[i] == answerCharArr[i]) {
+                ++res;
             }
-        }
-        return res;
-    }
+		}
 
-    private int checkStrike(String guessAnswer, String answer) {
-        char[] guessAnswerCharArr = guessAnswer.toCharArray();
-        char[] answerCharArr = answer.toCharArray();
+		return res;
+	}
 
-        int res = 0;
-        for (int i = 0; i < answerCharArr.length; i++){
-            if (guessAnswerCharArr[i] == answerCharArr[i]) ++ res;
-        }
-
-        return res;
-    }
-    public GameHistories makeHistory(GuessResult gamePlayResult) {
-        return new GameHistories(this.answer, gamePlayResult.getStrike(), gamePlayResult.getBall(), gamePlayResult.getOut());
-    }
+	public GameHistories makeHistory(GuessResult gamePlayResult) {
+		return new GameHistories(this.answer, gamePlayResult.getStrike(), gamePlayResult.getBall(),
+			gamePlayResult.getOut());
+	}
 }

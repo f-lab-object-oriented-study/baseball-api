@@ -7,6 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class GameStartResponse {
-    private int roomId;
+
+	private int roomId;
 
 }
