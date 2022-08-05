@@ -6,11 +6,11 @@ import lombok.Getter;
 public class GameHistory {
 
 	private Long id;
-	private Long roomId;
-	private String answer;
-	private int strike;
-	private int ball;
-	private int out;
+	private final Long roomId;
+	private final String answer;
+	private final int strike;
+	private final int ball;
+	private final int out;
 
 	public static GameHistory create(Long roomId, String answer, GameResult gameResult) {
 		return new GameHistory(roomId, answer, gameResult.getStrike(), gameResult.getBall(), gameResult.getOut());
@@ -31,4 +31,5 @@ public class GameHistory {
 	public boolean hasRoomId(Long roomId) {
 		return this.roomId.equals(roomId);
 	}
+
 }

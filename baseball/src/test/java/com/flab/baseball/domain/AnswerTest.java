@@ -3,6 +3,7 @@ package com.flab.baseball.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.flab.baseball.domain.answer.Answer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -35,7 +36,7 @@ class AnswerTest {
 		Answer answer = Answer.create(() -> "123");
 
 		// when
-		GameResult gameResult = answer.play("123");
+		GameResult gameResult = answer.gamePlay("123");
 
 		// then
 		assertThat(gameResult).isEqualTo(new GameResult(3, 0, 0));
@@ -47,7 +48,7 @@ class AnswerTest {
 		Answer answer = Answer.create(() -> "123");
 
 		// when
-		GameResult gameResult = answer.play("143");
+		GameResult gameResult = answer.gamePlay("143");
 
 		// then
 		assertThat(gameResult).isEqualTo(new GameResult(2, 0, 1));
@@ -59,7 +60,7 @@ class AnswerTest {
 		Answer answer = Answer.create(() -> "123");
 
 		// when
-		GameResult gameResult = answer.play("231");
+		GameResult gameResult = answer.gamePlay("231");
 
 		// then
 		assertThat(gameResult).isEqualTo(new GameResult(0, 3, 0));
@@ -71,7 +72,7 @@ class AnswerTest {
 		Answer answer = Answer.create(() -> "123");
 
 		// when
-		GameResult gameResult = answer.play("456");
+		GameResult gameResult = answer.gamePlay("456");
 
 		// then
 		assertThat(gameResult).isEqualTo(new GameResult(0, 0, 3));

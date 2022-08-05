@@ -2,6 +2,7 @@ package com.flab.baseball.domain;
 
 import static com.flab.baseball.util.BaseBallUtils.MAXIMUM_ROUND;
 
+import com.flab.baseball.domain.answer.Answer;
 import lombok.Getter;
 
 @Getter
@@ -23,19 +24,18 @@ public class Room {
 
 	public GameResult gamePlay(String inputAnswer) {
 		nextRound();
-		GameResult gameResult = answer.play(inputAnswer);
+		GameResult gameResult = answer.gamePlay(inputAnswer);
 		this.isCorrect = gameResult.isCorrect();
-
 
 		return gameResult;
 	}
 
-	private int nextRound() {
+	private void nextRound() {
 		if (round == MAXIMUM_ROUND || isCorrect) {
 			throw new IllegalStateException("이미 종료된 게임입니다.");
 		}
 
-		return ++round;
+		++round;
 	}
 
 	public void setId(Long id) {

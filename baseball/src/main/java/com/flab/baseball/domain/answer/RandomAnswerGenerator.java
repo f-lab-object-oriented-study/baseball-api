@@ -1,4 +1,4 @@
-package com.flab.baseball.domain;
+package com.flab.baseball.domain.answer;
 
 import static com.flab.baseball.util.BaseBallUtils.ANSWER_LENGTH;
 

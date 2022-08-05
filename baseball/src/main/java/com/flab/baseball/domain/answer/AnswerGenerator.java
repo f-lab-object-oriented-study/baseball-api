@@ -1,4 +1,4 @@
-package com.flab.baseball.domain;
+package com.flab.baseball.domain.answer;
 
 @FunctionalInterface
 public interface AnswerGenerator {

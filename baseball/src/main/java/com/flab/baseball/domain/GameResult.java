@@ -9,9 +9,9 @@ import lombok.Getter;
 @EqualsAndHashCode
 public class GameResult {
 
-	private int strike;
-	private int ball;
-	private int out;
+	private final int strike;
+	private final int ball;
+	private final int out;
 
 	public GameResult(int strike, int ball, int out) {
 		this.strike = strike;

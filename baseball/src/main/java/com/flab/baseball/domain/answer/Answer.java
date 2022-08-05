@@ -1,7 +1,8 @@
-package com.flab.baseball.domain;
+package com.flab.baseball.domain.answer;
 
 import static com.flab.baseball.util.BaseBallUtils.ANSWER_LENGTH;
 
+import com.flab.baseball.domain.GameResult;
 import lombok.Getter;
 
 @Getter
@@ -21,7 +22,7 @@ public class Answer {
 		this.answerNumber = answer;
 	}
 
-	public GameResult play(String inputAnswer) {
+	public GameResult gamePlay(String inputAnswer) {
 		String[] answers = answerNumber.split("");
 		String[] inputAnswers = inputAnswer.split("");
 		int strike = 0;
@@ -30,9 +31,9 @@ public class Answer {
 
 		for (int idx = 0; idx < inputAnswers.length; idx++) {
 			String num = inputAnswers[idx];
-			if (num.equals(answers[idx])) {
+			if (isStrike(answers[idx], num)) {
 				strike++;
-			} else if (answerNumber.contains(num)) {
+			} else if (isBall(num)) {
 				ball++;
 			} else {
 				out++;
@@ -40,6 +41,14 @@ public class Answer {
 		}
 
 		return new GameResult(strike, ball, out);
+	}
+
+	private boolean isStrike(String answer, String inputNumber) {
+		return answer.equals(inputNumber);
+	}
+
+	private boolean isBall(String inputNumber) {
+		return answerNumber.contains(inputNumber);
 	}
 
 }
