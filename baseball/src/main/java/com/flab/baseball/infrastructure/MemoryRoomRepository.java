@@ -2,6 +2,7 @@ package com.flab.baseball.infrastructure;
 
 import com.flab.baseball.domain.Room;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Repository;
 
@@ -23,14 +24,8 @@ public class MemoryRoomRepository {
 		return rooms.get(room.getId());
 	}
 
-	public Room findRoomById(Long id) {
-		Room room = rooms.get(id);
-
-		if (room == null) {
-			throw new IllegalArgumentException("존재하지 않는 룸 번호 입니다.");
-		}
-
-		return room;
+	public Optional<Room> findRoomById(Long id) {
+		return Optional.ofNullable(rooms.get(id));
 	}
 
 }

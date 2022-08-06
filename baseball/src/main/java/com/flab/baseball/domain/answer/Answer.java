@@ -2,7 +2,7 @@ package com.flab.baseball.domain.answer;
 
 import static com.flab.baseball.util.BaseBallUtils.ANSWER_LENGTH;
 
-import com.flab.baseball.domain.GameResult;
+import com.flab.baseball.domain.AnswerResult;
 import lombok.Getter;
 
 @Getter
@@ -22,7 +22,7 @@ public class Answer {
 		this.answerNumber = answer;
 	}
 
-	public GameResult gamePlay(String inputAnswer) {
+	public AnswerResult checkAnswer(String inputAnswer) {
 		String[] answers = answerNumber.split("");
 		String[] inputAnswers = inputAnswer.split("");
 		int strike = 0;
@@ -40,7 +40,7 @@ public class Answer {
 			}
 		}
 
-		return new GameResult(strike, ball, out);
+		return new AnswerResult(strike, ball, out);
 	}
 
 	private boolean isStrike(String answer, String inputNumber) {

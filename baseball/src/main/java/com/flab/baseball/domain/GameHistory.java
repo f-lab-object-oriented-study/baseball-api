@@ -12,11 +12,11 @@ public class GameHistory {
 	private final int ball;
 	private final int out;
 
-	public static GameHistory create(Long roomId, String answer, GameResult gameResult) {
+	public static GameHistory create(Long roomId, String answer, AnswerResult gameResult) {
 		return new GameHistory(roomId, answer, gameResult.getStrike(), gameResult.getBall(), gameResult.getOut());
 	}
 
-	public GameHistory(Long roomId, String answer, int strike, int ball, int out) {
+	private GameHistory(Long roomId, String answer, int strike, int ball, int out) {
 		this.roomId = roomId;
 		this.answer = answer;
 		this.strike = strike;
@@ -26,10 +26,6 @@ public class GameHistory {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public boolean hasRoomId(Long roomId) {
-		return this.roomId.equals(roomId);
 	}
 
 }

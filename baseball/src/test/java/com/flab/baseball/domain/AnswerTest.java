@@ -36,10 +36,10 @@ class AnswerTest {
 		Answer answer = Answer.create(() -> "123");
 
 		// when
-		GameResult gameResult = answer.gamePlay("123");
+		AnswerResult gameResult = answer.checkAnswer("123");
 
 		// then
-		assertThat(gameResult).isEqualTo(new GameResult(3, 0, 0));
+		assertThat(gameResult).isEqualTo(new AnswerResult(3, 0, 0));
 	}
 
 	@Test
@@ -48,10 +48,10 @@ class AnswerTest {
 		Answer answer = Answer.create(() -> "123");
 
 		// when
-		GameResult gameResult = answer.gamePlay("143");
+		AnswerResult gameResult = answer.checkAnswer("143");
 
 		// then
-		assertThat(gameResult).isEqualTo(new GameResult(2, 0, 1));
+		assertThat(gameResult).isEqualTo(new AnswerResult(2, 0, 1));
 	}
 
 	@Test
@@ -60,10 +60,10 @@ class AnswerTest {
 		Answer answer = Answer.create(() -> "123");
 
 		// when
-		GameResult gameResult = answer.gamePlay("231");
+		AnswerResult gameResult = answer.checkAnswer("231");
 
 		// then
-		assertThat(gameResult).isEqualTo(new GameResult(0, 3, 0));
+		assertThat(gameResult).isEqualTo(new AnswerResult(0, 3, 0));
 	}
 
 	@Test
@@ -72,10 +72,10 @@ class AnswerTest {
 		Answer answer = Answer.create(() -> "123");
 
 		// when
-		GameResult gameResult = answer.gamePlay("456");
+		AnswerResult gameResult = answer.checkAnswer("456");
 
 		// then
-		assertThat(gameResult).isEqualTo(new GameResult(0, 0, 3));
+		assertThat(gameResult).isEqualTo(new AnswerResult(0, 0, 3));
 	}
 
 }

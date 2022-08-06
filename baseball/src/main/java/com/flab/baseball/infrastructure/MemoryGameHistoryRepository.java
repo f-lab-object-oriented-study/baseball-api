@@ -32,7 +32,7 @@ public class MemoryGameHistoryRepository {
 		for (Entry<Long, GameHistory> entry : histories.entrySet()) {
 			GameHistory value = entry.getValue();
 
-			if (value.hasRoomId(roomId)) {
+			if (roomId.equals(value.getRoomId())) {
 				gameHistories.add(value);
 			}
 		}

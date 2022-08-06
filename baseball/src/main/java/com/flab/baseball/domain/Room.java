@@ -22,20 +22,24 @@ public class Room {
 		this.answer = answer;
 	}
 
-	public GameResult gamePlay(String inputAnswer) {
-		nextRound();
-		GameResult gameResult = answer.gamePlay(inputAnswer);
+	public AnswerResult gamePlay(String inputAnswer) {
+		validGamePlay();
+
+		AnswerResult gameResult = answer.checkAnswer(inputAnswer);
 		this.isCorrect = gameResult.isCorrect();
+		this.round = this.round + 1;
 
 		return gameResult;
 	}
 
-	private void nextRound() {
+	private void validGamePlay() {
 		if (round == MAXIMUM_ROUND || isCorrect) {
 			throw new IllegalStateException("이미 종료된 게임입니다.");
 		}
+	}
 
-		++round;
+	public int getRemainingCount() {
+		return MAXIMUM_ROUND - this.round;
 	}
 
 	public void setId(Long id) {

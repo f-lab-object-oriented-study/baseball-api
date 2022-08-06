@@ -7,13 +7,13 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode
-public class GameResult {
+public class AnswerResult {
 
 	private final int strike;
 	private final int ball;
 	private final int out;
 
-	public GameResult(int strike, int ball, int out) {
+	public AnswerResult(int strike, int ball, int out) {
 		this.strike = strike;
 		this.ball = ball;
 		this.out = out;

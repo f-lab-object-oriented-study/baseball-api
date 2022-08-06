@@ -1,8 +1,7 @@
 package com.flab.baseball.application.data;
 
-import static com.flab.baseball.util.BaseBallUtils.MAXIMUM_ROUND;
-
-import com.flab.baseball.domain.GameResult;
+import com.flab.baseball.domain.AnswerResult;
+import com.flab.baseball.domain.Room;
 import lombok.Getter;
 
 @Getter
@@ -14,9 +13,9 @@ public class GamePlayData {
 	private final int ball;
 	private final int out;
 
-	public GamePlayData(int round, GameResult gameResult) {
+	public GamePlayData(Room room, AnswerResult gameResult) {
 		this.correct = gameResult.isCorrect();
-		this.remainingCount = MAXIMUM_ROUND - round;
+		this.remainingCount = room.getRemainingCount();
 		this.strike = gameResult.getStrike();
 		this.ball = gameResult.getBall();
 		this.out = gameResult.getOut();

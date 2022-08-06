@@ -2,6 +2,7 @@ package com.flab.baseball.infrastructure;
 
 import com.flab.baseball.domain.Room;
 import com.flab.baseball.domain.repository.RoomRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,7 @@ public class RoomRepositoryAdaptor implements RoomRepository {
 	}
 
 	@Override
-	public Room findRoomById(Long id) {
+	public Optional<Room> findRoomById(Long id) {
 		return roomRepository.findRoomById(id);
 	}
 
